@@ -14,7 +14,127 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      audits: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          initiated_by: string | null
+          started_at: string | null
+          status: string
+          summary: Json | null
+          updated_at: string
+          website_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          initiated_by?: string | null
+          started_at?: string | null
+          status?: string
+          summary?: Json | null
+          updated_at?: string
+          website_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          initiated_by?: string | null
+          started_at?: string | null
+          status?: string
+          summary?: Json | null
+          updated_at?: string
+          website_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audits_website_id_fkey"
+            columns: ["website_id"]
+            isOneToOne: false
+            referencedRelation: "websites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          onboarding_completed: boolean
+          primary_website_id: string | null
+          stripe_customer_id: string | null
+          subscription_status: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          onboarding_completed?: boolean
+          primary_website_id?: string | null
+          stripe_customer_id?: string | null
+          subscription_status?: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          onboarding_completed?: boolean
+          primary_website_id?: string | null
+          stripe_customer_id?: string | null
+          subscription_status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_primary_website_fk"
+            columns: ["primary_website_id"]
+            isOneToOne: false
+            referencedRelation: "websites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      websites: {
+        Row: {
+          address: string | null
+          created_at: string
+          gbp_place_id: string | null
+          id: string
+          name: string | null
+          owner_user_id: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          gbp_place_id?: string | null
+          id?: string
+          name?: string | null
+          owner_user_id: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          gbp_place_id?: string | null
+          id?: string
+          name?: string | null
+          owner_user_id?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
